@@ -1,0 +1,63 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; background: #0f1420; color: #e8eaf0; }
+
+.app { max-width: 1100px; margin: 0 auto; padding: 24px; }
+header h1 { margin: 0 0 4px; font-size: 22px; }
+.subtitle { margin: 0 0 20px; color: #8b93a7; font-size: 14px; }
+
+.board { display: grid; grid-template-columns: 260px 1fr; gap: 20px; }
+
+.available-panel, .containers-panel, .conflict-log {
+  background: #171d2c; border: 1px solid #262f45; border-radius: 10px; padding: 16px;
+}
+
+.shipment-list { display: flex; flex-direction: column; gap: 8px; min-height: 100px; }
+
+.shipment-chip {
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: #202a42; border: 1px solid #33405e; border-radius: 8px;
+  padding: 8px 10px; cursor: grab; font-size: 13px;
+}
+.shipment-chip.placed { background: #16331f; border-color: #2c5a3a; cursor: default; }
+.shipment-chip.pending { background: #3a3417; border-color: #6b5c1e; cursor: default; animation: pulse 1s infinite; }
+.shipment-chip.locked-other { opacity: 0.4; cursor: not-allowed; }
+
+.weight-badge { color: #9fb0d1; font-size: 12px; }
+.lock-tag, .pending-tag { font-size: 11px; color: #f0c419; }
+
+.containers-panel { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.container-slot { background: #12182a; border: 1px solid #262f45; border-radius: 8px; padding: 10px; min-height: 260px; }
+.container-slot.over-capacity { border-color: #b23b3b; }
+
+.container-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.container-header h3 { margin: 0; font-size: 14px; }
+.capacity { font-size: 12px; color: #9fb0d1; }
+
+.capacity-bar { height: 5px; background: #262f45; border-radius: 4px; overflow: hidden; margin-bottom: 10px; }
+.capacity-fill { height: 100%; background: #4a8cff; transition: width 0.3s ease; }
+.over-capacity .capacity-fill { background: #d94848; }
+
+.container-items { display: flex; flex-direction: column; gap: 6px; }
+
+.empty { color: #566079; font-size: 13px; }
+
+.conflict-log { margin-top: 20px; }
+.conflict-log table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.conflict-log th, .conflict-log td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #262f45; }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* --- The "snap back" rejection animation --- */
+@keyframes snapBack {
+  0%   { transform: translateX(0) scale(1); background: #202a42; }
+  20%  { transform: translateX(-6px) scale(1.02); background: #4a1f22; }
+  40%  { transform: translateX(6px) scale(1.02); background: #4a1f22; }
+  60%  { transform: translateX(-4px) scale(1); background: #4a1f22; }
+  100% { transform: translateX(0) scale(1); background: #202a42; }
+}
+.shipment-chip.snap-back {
+  animation: snapBack 0.5s ease-in-out;
+}
