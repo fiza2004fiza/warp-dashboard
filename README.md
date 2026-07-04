@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Collision-Agile Dynamic Workspace
 
 ## Run it
@@ -61,3 +62,6 @@ acquires a lock in the first place).
 - No auth/user identity — "User A / User B" is really "tab A / tab B".
 - Drag-and-drop uses native HTML5 DnD, not `react-dnd`, to keep the
   dependency list honest for a take-home.
+=======
+# warp-dashboard
+>>>>>>> a743dae6d05e827f8c1e6065bbfa8260ce3e1e70
